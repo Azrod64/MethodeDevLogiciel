@@ -3,7 +3,10 @@
     "eslint": "^8.35.0"
   },
   "dependencies": {
+    "chalk": "^5.2.0",
+    "chalks": "^0.1.5",
     "inquirer": "^8.2.5",
+    "inquirer-chalk-pipe": "^1.3.0",
     "inquirer-loop": "^0.3.0",
     "require": "^2.4.20"
   }

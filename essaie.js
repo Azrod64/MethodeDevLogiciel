@@ -1,6 +1,7 @@
 // importation des modules
 const fs = require("fs");
 const inquirer = require("inquirer");
+const chalkPipe = require("chalk-pipe");
 
 // lecture du fichier "user.json"
 let rawdata = fs.readFileSync("users.json");
@@ -47,7 +48,7 @@ async function main() { // utilisation de async pour renvoyer une promesse
             {
                 type: "list",
                 name: "attribute",
-                message: "Select a category",
+                message: chalkPipe("red")("Select a category"),
                 choices: ["country", "company", new inquirer.Separator(), "quit"],
             }
         ]).then((answers) => {
@@ -58,7 +59,6 @@ async function main() { // utilisation de async pour renvoyer une promesse
             console.table(distinct(answers.attribute));
         });
     }
-    
 }
 
 //Lancement du programme main
