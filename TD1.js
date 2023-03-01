@@ -1,3 +1,10 @@
+//
+// TD1.js
+// Application en NodeJS
+//
+// Created by Moisan Romuald 
+//
+
 // importation des modules
 const fs = require("fs");
 const inquirer = require("inquirer");
@@ -17,12 +24,12 @@ function isIn(tableau, string, type) {
     return false;
 }
 
-//fonction qui permet de lister les différent attribut avec un compteur
+// fonction qui permet de lister les différent attribut avec un compteur
 function distinct(attribut) {
     const tab = [];
     for (let i = 0; i < data.length; i++) {
         if (!isIn(tab, data[i][attribut], attribut)) {
-            //Listing all the different tab
+            // Liste de tout les différents tableaux
             let obj = { [attribut]: data[i][attribut], counter: 1 };
             tab.push(obj);
         }
@@ -42,13 +49,12 @@ function distinct(attribut) {
 // fonction fait appelle à un menu
 async function main() { // utilisation de async pour renvoyer une promesse
     let stop = false;
-    while(!stop)
-    {
+    while (!stop) {
         await inquirer.prompt([ // await permet d'attendre que la promesse ce réalise
             {
                 type: "list",
                 name: "attribute",
-                message: chalkPipe("red")("Select a category"),
+                message: chalkPipe("red")("Select a category"), // chalkPipe : ajoute de la couleur
                 choices: ["country", "company", new inquirer.Separator(), "quit"],
             }
         ]).then((answers) => {
