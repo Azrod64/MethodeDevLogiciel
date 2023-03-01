@@ -1,6 +1,7 @@
 // importation des modules
 const fs = require("fs");
 const inquirer = require("inquirer");
+
 // lecture du fichier "user.json"
 let rawdata = fs.readFileSync("users.json");
 const data = JSON.parse(rawdata);
@@ -36,21 +37,28 @@ function distinct(attribut) {
     tab.sort((a, b) => b.counter - a.counter);
     console.log(tab);
 }
+
 // fonction fait appelle à un menu
-function main() {
-    inquirer.prompt([
-        {
-            type: "list",
-            name: "attribute",
-            message: "Select a category",
-            choices: ["country", "company", "quit"],
-        }
-    ]).then((answers) => {
-        if (answers.attribute == "quit") {
-            return;
-        }
-        console.table(distinct(answers.attribute));
-    });
+async function main() { // utilisation de async pour renvoyer une promesse
+    let stop = false;
+    while(!stop)
+    {
+        await inquirer.prompt([ // await permet d'attendre que la promesse ce réalise
+            {
+                type: "list",
+                name: "attribute",
+                message: "Select a category",
+                choices: ["country", "company", new inquirer.Separator(), "quit"],
+            }
+        ]).then((answers) => {
+            if (answers.attribute == "quit") {
+                stop = true;
+                return;
+            }
+            console.table(distinct(answers.attribute));
+        });
+    }
+    
 }
 
 //Lancement du programme main

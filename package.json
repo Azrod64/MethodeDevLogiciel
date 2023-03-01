@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "inquirer": "^8.2.5",
+    "inquirer-loop": "^0.3.0",
     "require": "^2.4.20"
   }
 }
